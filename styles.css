@@ -17,16 +17,20 @@ header {
     position: sticky;
     top: 0;
     z-index: 1000;
+    align-items: center;
+    justify-content: center;
 
 
 }
 
-nav {
+.main-menu {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
-
+    justify-content: center;
+    align-items: center;
 }
+
+
 
 .menu-icon {
     display: none;
@@ -46,7 +50,7 @@ nav {
 
 .logo:hover {
     text-shadow: #008f17 0px 0px 1px;
-    
+
 }
 
 .main-menu ul {
@@ -66,7 +70,7 @@ nav {
     color: #383c3e;
     font-weight: bold;
     transition: border-bottom 0.3s ease;
-    transition-duration: .6s;
+    transition-duration: .2s;
 
 }
 
@@ -116,12 +120,23 @@ form input:focus {
     box-shadow: 0 0 5px rgba(0, 143, 23, 0.2);
 }
 
-#adress,
+button:hover {
+    background-color: #006f12;
+}
+
+#adress {
+width: 100%;
+}
+
+
 #post-code {
+    margin-left: 20px;
+
+}
+.form-line{
     display: flex;
     flex-direction: row;
-    max-width: 50%;
-
+    margin-bottom: 20px;
 }
 
 .error {
@@ -129,7 +144,7 @@ form input:focus {
     font-size: 12px;
     margin-top: -10px;
     margin-bottom: 10px;
-    visibility: hidden;
+    /* visibility: hidden; */
 }
 
 .upload-btn {
@@ -139,9 +154,12 @@ form input:focus {
     color: #737B7D;
     text-align: center;
     font-size: 14px;
+    transition: background-color 0.3s ease;
 
 }
-
+    .upload-btn:hover {
+    background-color: #c3c3c3;
+}
 .upload-btn img {
     width: 20px;
     height: 20px;
@@ -165,7 +183,25 @@ form button {
     cursor: pointer;
     font-size: 16px;
     margin-top: 10px;
+    transition: background-color 0.3s ease;
 }
+
+.newsletter-form button {
+    background-color: #008f17;
+    color: #fff;
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-left: 15px;
+    margin-bottom: 50px;
+    transition: background-color 0.3s ease;
+}
+
+.newsletter-form button:hover {
+    background-color: #057017;
+}
+
 
 .form-footer {
     margin-top: 30px;
@@ -219,13 +255,179 @@ form button {
 
 }
 
-.newsletter-form button {
-    background-color: #008f17;
-    color: #fff;
-    border: none;
-    padding: 10px 15px;
-    cursor: pointer;
+
+@media (max-width: 1020px) {
+
+    .main-menu,.logo {
+        font-size: 10px;
+    }
+
+.contact-form {
+        flex-direction: column;
+        padding: 20px;
+    }
+
+}
+
+@media (max-width: 768px) {
+
+    .main-menu {
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        padding: 10px 0;
+    }
+
+    .contact-form {
+        flex-direction: column;
+        padding: 20px;
+    }
+
+    .contact-container,
+    .left-section,
+    .info-section {
+        padding: 0;
+        width: 100%;
+        flex: 1 1 100%;
+    }
+
+    #adress {
+max-width: ;}
+
+
+#post-code {
+    margin-left: 0;
+
+}
+.form-line{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+
+    .upload-btn {
+        padding: 20px;
+        text-align: center;
+    }
+
+    .newsletter-form {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .newsletter-form button {
+        margin-left: 0;
+        margin-top: 10px;
+    }
+
+
+    .main-menu {
+        font-size: 10px;
+    }
+
+    .logo {
+        display: none;
+    }
+}
+
+@media (max-width: 560px) {
+
+    .header {
+        flex-direction: row;
+        justify-content: flex-start;
+        background-color: #ffffff;
+        margin: 0 0 0 20px;
+    }
+
+    .main-menu {
+        display: none;
+    }
+
+    .menu-icon {
+        display: flex;
+        justify-content: start;
+        align-items: start;
+        align-self: start;
+        padding-right: 20px;
+        transition:  color 0.3s ease;
+    }
+    .menu-icon:hover {
+        color: #008f17;
+    }
+
+    .contact-form {
+        flex-direction: column;
+        padding: 20px;
+    }
+
+    form input,
+textarea {
+    margin: 0 0 24px 0;
+    padding: 5px;
+    border: 1px none #ccc;
+    border-bottom: 1px solid #ccc;
     font-size: 16px;
-    margin-left: 15px;
-    margin-bottom: 50px;
+    max-width: 70%;
+    outline: none;
+    resize: vertical;
+    font-family: 'Inter', sans-serif;
+
+
+}
+.title-section{
+    margin-bottom: 20px;
+    max-width: 90%;
+}
+#adress,
+#post-code {
+    display: flex;
+    flex-direction: row;
+    max-width: 70%;
+
+}
+    .contact-container,
+    .left-section,
+    .info-section {
+        padding: 0;
+        width: 100%;
+        flex: 1 1 100%;
+    }
+
+    .upload-btn {
+        padding: 20px;
+        text-align: center;
+            max-width: 70%;
+
+    }
+    .upload-note,button,.form-footer{
+        max-width: 70%;
+    }
+   lable {
+        min-width: 2px;
+        padding: 0;
+        margin: 0;
+        max-width: fit-content;        
+    }
+
+
+
+
+    .newsletter-form {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .newsletter-form button {
+        margin-left: 0;
+        margin-top: 10px;
+    }
+
+
+    .main-menu {
+        font-size: 10px;
+    }
+
+    .logo {
+        display: none;
+    }
 }
