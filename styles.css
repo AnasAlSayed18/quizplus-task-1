@@ -1,0 +1,231 @@
+.contact-page {
+    background-color: #ffffff;
+    font-family: 'Inter', sans-serif;
+    align-items: top;
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+
+}
+
+header {
+    display: flex;
+    flex-direction: row;
+    background-color: #f9f9f9;
+    max-width: 100%;
+    max-height: 60px;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+
+
+}
+
+nav {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+}
+
+.menu-icon {
+    display: none;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.logo {
+    font-size: 24px;
+    color: #959595;
+    align-self: center;
+    font-family: 'Inter', Inter, Inter, sans-serif;
+    padding-left: 160px;
+    transition: text-shadow 0.3s ease;
+    transition-duration: .5s;
+}
+
+.logo:hover {
+    text-shadow: #008f17 0px 0px 1px;
+    
+}
+
+.main-menu ul {
+    list-style: none;
+    display: flex;
+    flex-direction: row;
+    margin-top: 3.5%;
+}
+
+.main-menu ul li {
+    margin: 0 15px;
+
+}
+
+.main-menu ul li a {
+    text-decoration: none;
+    color: #383c3e;
+    font-weight: bold;
+    transition: border-bottom 0.3s ease;
+    transition-duration: .6s;
+
+}
+
+.main-menu ul li a:hover {
+    border-bottom: 2px solid #008f17;
+    border-radius: 1px;
+}
+
+.contact-form {
+    display: flex;
+    flex-direction: row;
+    padding: 20px;
+    padding-left: 160px;
+}
+
+.title-section {
+    margin-bottom: 20px;
+}
+
+.welcome-message {
+    color: #737B7D;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    max-width: 600px;
+}
+
+
+form input,
+textarea {
+    margin: 0 0 24px 0;
+    padding: 5px;
+    border: 1px none #ccc;
+    border-bottom: 1px solid #ccc;
+    font-size: 16px;
+    outline: none;
+    resize: vertical;
+    font-family: 'Inter', sans-serif;
+
+
+}
+
+form input:focus {
+    border-color: #008f17;
+    box-shadow: 0 0 5px rgba(0, 143, 23, 0.2);
+}
+
+#adress,
+#post-code {
+    display: flex;
+    flex-direction: row;
+    max-width: 50%;
+
+}
+
+.error {
+    color: red;
+    font-size: 12px;
+    margin-top: -10px;
+    margin-bottom: 10px;
+    visibility: hidden;
+}
+
+.upload-btn {
+    background: #f7f7f7;
+    border: 1px dashed #aaa;
+    padding: 24px;
+    color: #737B7D;
+    text-align: center;
+    font-size: 14px;
+
+}
+
+.upload-btn img {
+    width: 20px;
+    height: 20px;
+    vertical-align: middle;
+    margin-right: 5px;
+    padding-bottom: 5px;
+}
+
+.upload-note {
+    font-size: 12px;
+    color: #8e8e8e;
+    margin-bottom: 10px;
+}
+
+
+form button {
+    padding: 10px;
+    background-color: #008f17;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 10px;
+}
+
+.form-footer {
+    margin-top: 30px;
+    color: #383c3e;
+}
+
+
+.contact-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 50px;
+    padding: 40px 160px;
+    flex-wrap: wrap;
+}
+
+.left-section {
+    flex: 2;
+    min-width: 300px;
+}
+
+.info-section {
+    flex: 1;
+    min-width: 250px;
+    padding-top: 60px;
+}
+
+.info-section h3 {
+    color: #383c3e;
+    font-size: 16px;
+    margin-bottom: 30px;
+}
+
+.info-section p {
+    color: #737B7D;
+    font-size: 14px;
+    margin-bottom: 35px;
+}
+
+.info-section p img {
+    width: 22px;
+    height: 20px;
+    vertical-align: middle;
+    margin-right: 5px;
+}
+
+.newsletter-form {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-top: 20px;
+
+}
+
+.newsletter-form button {
+    background-color: #008f17;
+    color: #fff;
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-left: 15px;
+    margin-bottom: 50px;
+}
