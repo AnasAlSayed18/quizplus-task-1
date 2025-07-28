@@ -1,7 +1,7 @@
 .contact-page {
     background-color: #ffffff;
     font-family: 'Inter', sans-serif;
-    align-items: top;
+    align-items: flex-start;
     padding: 0;
     margin: 0;
     box-sizing: border-box;
@@ -126,6 +126,7 @@ button:hover {
 
 #adress {
 width: 100%;
+max-width: 70%;
 }
 
 
@@ -292,7 +293,7 @@ form button {
     }
 
     #adress {
-max-width: ;}
+max-width:70% ;}
 
 
 #post-code {
@@ -402,7 +403,8 @@ textarea {
     .upload-note,button,.form-footer{
         max-width: 70%;
     }
-   lable {
+    
+  label  {
         min-width: 2px;
         padding: 0;
         margin: 0;
