@@ -10,7 +10,7 @@
 
 <body class="contact-page">
     <header class="header">
-        <h2 class="logo">Logo</h2>
+        <div class="logo">Logo</div>
         <div class="menu-icon" id="menuIcon">☰</div>
         <nav class="main-menu">
             <ul>
@@ -21,55 +21,48 @@
                 <li><a href="about.html">Portfolio</a></li>
                 <li><a href="contact.html">ContactUs</a></li>
             </ul>
-
         </nav>
-
     </header>
 
-
-
     <main class="contact-form">
-        <div class="left-section">
-
+        <section>
             <div class="title-section">
-
                 <h1>Contact Us</h1>
-                <p class="welcome-message">Need an experienced and skilled hand with custom IT projects? <br>Fill out
-                    the form to get a free
-                    consultation.</p>
+                <p class="welcome-message">Need an experienced and skilled hand with custom IT projects?<br>Fill out the form to get a free consultation.</p>
             </div>
 
             <form action="submit_form.php" method="post">
-                <input type="text" id="name" name="name" placeholder="Your Company Name" required>
+                <input type="text" id="company-name" name="company-name" placeholder="Your Company Name" required>
+                <input type="text" id="business-type" name="business-type" placeholder="Nature of Business" required>
 
-                <input type="text" id="bussiness" name="name" placeholder="Nature of Bussiness" required>
-                <div class="form-line" >
-                <input type="text" id="adress" name="adress" placeholder="Adress" required>
-                <input type="text" id="post-code" name="post-code" placeholder="Postcode" required>
-
+                <div class="form-line">
+                    <input type="text" id="adress" name="adress" placeholder="Address" required>
+                    <input type="text" id="post-code" name="post-code" placeholder="Postcode" required>
                 </div>
+
                 <input type="text" id="contact-name" name="contact-name" placeholder="Contact name" required>
                 <input type="text" id="contact-phone" name="contact-phone" placeholder="Contact Phone" required>
-
                 <input type="email" id="email" name="email" placeholder="Email" required>
                 <small class="error">Please, enter valid email address</small>
 
                 <input type="text" id="linkedin" name="linkedin" placeholder="Linkedin" required>
                 <textarea placeholder="Let's talk about your idea"></textarea>
-                <label for="file-upload" class="upload-btn"> <img src="img/upload.png"> Upload additional file</label>
+
+                <label for="file-upload" class="upload-btn">
+                    <img src="img/upload.png"> Upload additional file
+                </label>
                 <input type="file" id="file-upload" hidden>
                 <p class="upload-note">Attach file. File size of your documents should not exceed 10MB</p>
-
 
                 <button type="submit">Submit</button>
 
                 <div class="form-footer">
                     <input type="checkbox" id="privacy-policy" name="privacy-policy" required>
-                    <label for="privacy-policy">I want to protect my data by signing an NDA </label>
-
+                    <label for="privacy-policy">I want to protect my data by signing an NDA</label>
                 </div>
             </form>
-        </div>
+        </section>
+
 
         <aside class="info-section">
             <h3>Offices</h3>
