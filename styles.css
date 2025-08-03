@@ -145,7 +145,7 @@ max-width: 70%;
     font-size: 12px;
     margin-top: -10px;
     margin-bottom: 10px;
-    /* visibility: hidden; */
+     visibility: hidden; 
 }
 
 .upload-btn {
@@ -255,7 +255,91 @@ form button {
     margin-top: 20px;
 
 }
+.toast-box {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
 
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: hidden;
+  padding: 20px;
+  
+}
+
+
+.toast{
+width: 400px;
+height: 80px;
+background: #fff;
+font-weight: 500;
+font-size: 14px;
+margin: 0 0 15px 0;
+box-shadow: rgba(0, 0, 0, 0.2) 0px 20px 15px -15px;
+display: flex;
+align-items: center;
+position: relative;
+transform: translateX(100%);
+animation: moveleft 0.5s linear forwards;
+
+
+}
+
+@keyframes moveleft {
+    100% {
+        transform: translateX(0);
+    }
+    
+}
+
+.toast-icon {
+  margin: 0 20px;
+  font-size: 28px;
+}
+
+.toast-success .toast-icon {
+  color: #008f17;
+}
+
+.toast-error .toast-icon {
+  color: #ff0000;
+}
+
+.toast-info .toast-icon {
+  color: #007bff;
+}
+.toast.toast-success { 
+    --toast-bar-color: #008f17; 
+}
+
+.toast.toast-error   { 
+    --toast-bar-color: #ff0000;
+ }
+
+.toast.toast-info    { 
+    --toast-bar-color: #007bff; 
+}
+
+.toast::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 5px;
+  background-color: var(--toast-bar-color);
+  bottom: 0;
+  left: 0;
+  animation: anim 5s linear forwards;
+}
+
+
+@keyframes anim {
+
+    100% {
+        width: 0%;
+    }
+}
 
 @media (max-width: 1020px) {
 
@@ -375,6 +459,10 @@ textarea {
 
 
 }
+
+
+
+
 .title-section{
     margin-bottom: 20px;
     max-width: 90%;
@@ -432,4 +520,21 @@ textarea {
     .logo {
         display: none;
     }
+}
+.checkout-btn {
+  background-color: #239e57;
+  color: white;
+  border: none;
+  /* display: flex; */
+  padding: 14px 24px;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+  animation: bounceIn 1.2s ease infinite;
+  align-content: stretch;
+  flex-wrap: wrap;
+  flex-direction: column-reverse;
+  transition: background-color 0.3s ease;
 }

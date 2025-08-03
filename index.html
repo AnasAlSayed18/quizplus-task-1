@@ -5,7 +5,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contact Us Page</title>
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <link rel="stylesheet" href="styles.css">
+
 </head>
 
 <body class="contact-page">
@@ -26,45 +30,59 @@
 
     <main class="contact-form">
         <section class="left-section">
+
+
+
+
             <div class="title-section">
                 <h1>Contact Us</h1>
-                <p class="welcome-message">Need an experienced and skilled hand with custom IT projects?<br>Fill out the form to get a free consultation.</p>
+                <p class="welcome-message">Need an experienced and skilled hand with custom IT projects?<br>Fill out the
+                    form to get a free consultation.</p>
             </div>
 
-            <form action="submit_form.php" method="post">
+            <form id="contact-form">
                 <input type="text" id="company-name" name="company-name" placeholder="Your Company Name" required>
                 <input type="text" id="business-type" name="business-type" placeholder="Nature of Business" required>
 
                 <div class="form-line">
                     <input type="text" id="adress" name="adress" placeholder="Address" required>
-                    <input type="text" id="post-code" name="post-code" placeholder="Postcode" required>
+                    <input type="number" id="post-code" name="post-code" placeholder="Postcode" required>
                 </div>
 
                 <input type="text" id="contact-name" name="contact-name" placeholder="Contact name" required>
-                <input type="text" id="contact-phone" name="contact-phone" placeholder="Contact Phone" required>
+                <input type="number" id="contact-phone" name="contact-phone" placeholder="Contact Phone" required>
                 <input type="email" id="email" name="email" placeholder="Email" required>
-                <small class="error">Please, enter valid email address</small>
+                <small class="error" style="display:none; color:red;">Please, enter valid email address</small>
 
-                <input type="text" id="linkedin" name="linkedin" placeholder="Linkedin" required>
-                <textarea placeholder="Let's talk about your idea"></textarea>
+                <input type="text" id="linkedin" name="linkedin" placeholder="Linkedin">
+                <textarea placeholder="Let's talk about your idea" name="message"></textarea>
 
                 <label for="file-upload" class="upload-btn">
                     <img src="img/upload.png"> Upload additional file
                 </label>
-                <input type="file" id="file-upload" hidden>
+                <input type="file" id="file-upload" name="file" hidden accept=".pdf">
+
                 <p class="upload-note">Attach file. File size of your documents should not exceed 10MB</p>
 
-                <button type="submit">Submit</button>
-
                 <div class="form-footer">
-                    <input type="checkbox" id="privacy-policy" name="privacy-policy" required>
+                    <input type="checkbox" id="privacy-policy" name="privacy-policy">
                     <label for="privacy-policy">I want to protect my data by signing an NDA</label>
+                    <button type="button"
+                        onclick="showToast('Please read our Privacy Policy before submitting.', 'info'); ">Read our
+                        Privacy Policy</button>
                 </div>
+
+                <button type="submit" id="submitBtn" disabled>Submit</button>
             </form>
+
         </section>
 
 
         <aside class="info-section">
+
+            <div id="toast-box" class="toast-box"> </div>
+
+
             <h3>Offices</h3>
             <p>United States<br>500 5th Avenue Suite 400, NY 10110</p>
             <p>United Kingdom<br>High St, Bromley BR1 1DN</p>
@@ -74,12 +92,212 @@
             <p><img src="img/gb.png" alt="GB"> +44 7777777777<br><img src="img/us.png" alt="US"> +1 3333333330</p>
 
             <h3>Would you like to join our newsletter?</h3>
-            <form class="newsletter-form">
-                <input type="email" placeholder="Email">
+            <form class="newsletter-form" submit=" validateForm()">
+                <input type="email" id="news-email" name="email" placeholder="Email">
                 <button class="submit-newsletter">&#10004;</button>
             </form>
         </aside>
     </main>
+
+
+
+
+
+    <script>
+        const form = document.getElementById("contact-form");
+        const submitBtn = document.getElementById("submitBtn");
+        let isValid = false;
+
+        form.addEventListener("submit", function (e) {
+            e.preventDefault();
+            validateForm();
+            if (!isValid) {
+                alert("Please correct the errors before submitting.");
+                return;
+            }
+            const fileUpload = document.getElementById("file-upload");
+
+            if (!validateFile()) {
+                return;
+            }
+
+
+            const formData = new FormData(form);
+            console.log("*********************************");
+            console.log("Form Data Submitted:");
+            formData.forEach((value, key) => {
+                console.log(key + ": " + value);
+            });
+            console.log("*********************************");
+
+            alert("Form submitted successfully!");
+        });
+
+        function validateForm() {
+            const emailInput = document.getElementById("email");
+            const phoneInput = document.getElementById("contact-phone");
+            const postCodeInput = document.getElementById("post-code");
+            const newsEmailInput = document.getElementById("news-email");
+
+            const companyName = document.getElementById("company-name").value.trim();
+            const businessType = document.getElementById("business-type").value.trim();
+            const address = document.getElementById("adress").value.trim();
+            const contactName = document.getElementById("contact-name").value.trim();
+            const privacyPolicy = document.getElementById("privacy-policy").checked;
+            const errorElement = document.querySelector(".error");
+
+            isValid = true;
+
+            if (!companyName || !businessType || !address || !contactName || !privacyPolicy) {
+                isValid = false;
+            }
+
+            const phone = phoneInput.value.trim();
+
+
+            if (phone.length !== 10 || isNaN(phone)) {
+
+                if (phone !== "") {
+                    phoneInput.style.borderBottom = "1px solid red";
+                } else {
+                    phoneInput.style.borderBottom = "";
+                }
+
+                isValid = false;
+            } else {
+                phoneInput.style.borderBottom = "1px solid green";
+            }
+
+            const postCode = postCodeInput.value.trim();
+            if (postCode.length !== 5 || isNaN(postCode)) {
+
+                if (postCode !== "") {
+                    postCodeInput.style.borderBottom = "1px solid red";
+                } else {
+                    postCodeInput.style.borderBottom = "";
+                }
+                isValid = false;
+            } else {
+                postCodeInput.style.borderBottom = "1px solid green";
+            }
+
+            const email = emailInput.value.trim();
+            if (!email.includes("@") || !email.includes(".")) {
+                errorElement.style.display = "inline";
+
+                if (email !== "") {
+                    emailInput.style.borderBottom = "1px solid red";
+                } else {
+                    emailInput.style.borderBottom = "";
+                }
+
+
+                isValid = false;
+            } else {
+                errorElement.style.display = "none";
+                emailInput.style.borderBottom = "1px solid green";
+            }
+
+            const newsEmail = newsEmailInput.value.trim();
+            if (newsEmail && (!newsEmail.includes("@") || !newsEmail.includes("."))) {
+
+
+
+                if (newsEmail !== "") {
+                    newsEmailInput.style.borderBottom = "1px solid red";
+                } else {
+                    newsEmailInput.style.borderBottom = "";
+                }
+
+                isValid = false;
+            } else {
+                newsEmailInput.style.borderBottom = "1px solid green";
+            }
+
+            submitBtn.disabled = !isValid;
+            submitBtn.style.backgroundColor = isValid ? "#4CAF50" : "#ccc";
+            //adding hover effect
+
+        }
+
+        window.onload = function () {
+            for (let i = 0; i < form.elements.length; i++) {
+                const el = form.elements[i];
+                if (el.tagName !== "BUTTON") {
+                    el.addEventListener("input", validateForm);
+                    el.addEventListener("change", validateForm);
+                }
+            }
+
+            validateForm();
+        };
+
+
+
+        const fileUpload = document.getElementById("file-upload");
+        function validateFile() {
+            const file = fileUpload.files[0];
+            const toastBox = document.getElementById("toast-box");
+
+            if (!file) {
+                return true;
+            }
+
+            const allowedExtension = /\.pdf$/i;
+            if (!allowedExtension.test(file.name)) {
+                showToast('<i class="fa-solid fa-circle-xmark"></i>  Only PDF files are allowed.');
+                fileUpload.value = "";
+                return false;
+            }
+
+            const maxSize = 10 * 1024 * 1024;
+            if (file.size > maxSize) {
+                showToast("File size exceeds 10MB. Please upload a smaller file.", "error");
+
+                fileUpload.value = "";
+                return false;
+            }
+
+            showToast("File uploaded successfully", "success");
+
+            return true;
+        }
+
+
+        const toastBox = document.getElementById("toast-box");
+
+        function showToast(message, type = "success") {
+            const toast = document.createElement("div");
+            toast.classList.add("toast", `toast-${type}`);
+
+            const icon = document.createElement("i");
+            icon.classList.add("toast-icon", "fas");
+
+            if (type === "success")
+                icon.classList.add("fa-circle-check");
+            else if (type === "error")
+                icon.classList.add("fa-circle-xmark");
+            else if (type === "info")
+                icon.classList.add("fa-circle-info");
+
+            toast.appendChild(icon);
+
+            const text = document.createElement("span");
+            text.innerText = " " + message;
+            toast.appendChild(text);
+
+            document.getElementById("toast-box").appendChild(toast);
+
+            setTimeout(() => {
+                toast.remove();
+            }, 5000);
+        }
+
+
+
+
+    </script>
+
 
 
 
