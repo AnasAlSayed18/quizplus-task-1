@@ -1,1 +1,1 @@
-Quizplus-Frontend-Trainee-First-Task
+Quizplus-Frontend-Trainee-Task
