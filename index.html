@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contact Us Page</title>
 
-    
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <link rel="stylesheet" href="styles.css">
 
@@ -18,17 +18,21 @@
         <div class="menu-icon" id="menuIcon">☰</div>
         <nav class="main-menu">
             <ul>
-                <li><a href="index.html">Company</a></li>
-                <li><a href="about.html">Services</a></li>
-                <li><a href="about.html">FinTechSolutions</a></li>
-                <li><a href="about.html">Products</a></li>
-                <li><a href="about.html">Portfolio</a></li>
-                <li><a href="contact.html">ContactUs</a></li>
+                <li><a href="company1.html">Company</a></li>
+                <li><a href="index.html">Services</a></li>
+                <li><a href="index.html">FinTechSolutions</a></li>
+                <li><a href="index.html">Products</a></li>
+                <li><a href="index.html">Portfolio</a></li>
+                <li><a href="index.html">ContactUs</a></li>
+                <li><a href="#" onclick="loadPage(event, 'company.html')">Company</a></li>
             </ul>
         </nav>
     </header>
 
-    <main class="contact-form">
+    <main id="main-content" class="main-content">
+
+
+
         <section class="left-section">
 
 
@@ -67,8 +71,7 @@
                 <div class="form-footer">
                     <input type="checkbox" id="privacy-policy" name="privacy-policy">
                     <label for="privacy-policy">I want to protect my data by signing an NDA</label>
-                    <button type="button"
-                        onclick="showToast('Please read our Privacy Policy before submitting.', 'info'); ">Read our
+                    <button type="button" class="privacy-policy-btn">Read our
                         Privacy Policy</button>
                 </div>
 
@@ -100,13 +103,46 @@
     </main>
 
 
+    <div id="terms-modal" class="terms-modal">
+        <div class="terms-content">
+            <h2>Terms & Conditions</h2>
+            <div class="terms-scroll">
+                <p>These terms and conditions outline the rules and regulations for the use of our website.</p>
+                <p>More dummy terms content goes here...</p>
+            </div>
+            <div class="terms-footer">
+                <input type="checkbox" id="terms-check" />
+                <label for="terms-check">I accept the terms</label>
+                <button onclick="closeTermsModal()" class="close-terms-btn">Close</button>
+            </div>
+        </div>
+    </div>
 
 
 
     <script>
         const form = document.getElementById("contact-form");
         const submitBtn = document.getElementById("submitBtn");
+        const termsModal = document.getElementById("terms-modal");
+        const termsCheckbox = document.getElementById("terms-check");
+        const privacyPolicyBtn = document.querySelector(".privacy-policy-btn");
+        const newsForm = document.querySelector(".newsletter-form");
+
         let isValid = false;
+
+
+        privacyPolicyBtn.addEventListener("click", () => {
+            termsModal.style.display = "block";
+        });
+
+        function closeTermsModal() {
+            termsModal.style.display = "none";
+            validateForm();
+        }
+
+
+
+
 
         form.addEventListener("submit", function (e) {
             e.preventDefault();
@@ -130,8 +166,30 @@
             });
             console.log("*********************************");
 
-            alert("Form submitted successfully!");
+
+            showToast("Form submitted successfully", "success");
+            form.reset();
         });
+
+
+
+        newsForm.addEventListener("submit", function (e) {
+            e.preventDefault();
+            const newsEmailInput = document.getElementById("news-email");
+            const email = newsEmailInput.value.trim();
+
+            if (!email.includes("@") || !email.includes(".")) {
+                showToast("Please enter a valid news email address.", "error");
+                newsEmailInput.style.borderBottom = "1px solid red";
+                return;
+            } else {
+                newsEmailInput.style.borderBottom = "1px solid green";
+            }
+
+            showToast("Thank you for subscribing to our newsletter!", "success");
+            newsEmailInput.value = "";
+        });
+
 
         function validateForm() {
             const emailInput = document.getElementById("email");
@@ -149,6 +207,7 @@
             isValid = true;
 
             if (!companyName || !businessType || !address || !contactName || !privacyPolicy) {
+
                 isValid = false;
             }
 
@@ -158,6 +217,7 @@
             if (phone.length !== 10 || isNaN(phone)) {
 
                 if (phone !== "") {
+                    // showToast("Please enter a valid phone number.", "error");
                     phoneInput.style.borderBottom = "1px solid red";
                 } else {
                     phoneInput.style.borderBottom = "";
@@ -172,6 +232,7 @@
             if (postCode.length !== 5 || isNaN(postCode)) {
 
                 if (postCode !== "") {
+                    // showToast("Please enter a valid postcode.", "error");
                     postCodeInput.style.borderBottom = "1px solid red";
                 } else {
                     postCodeInput.style.borderBottom = "";
@@ -186,33 +247,26 @@
                 errorElement.style.display = "inline";
 
                 if (email !== "") {
+                    // showToast("Please enter a valid email address.", "error");
                     emailInput.style.borderBottom = "1px solid red";
                 } else {
                     emailInput.style.borderBottom = "";
                 }
 
-
+                newsEmailInput.addEventListener("input", function () {
+                    const email = newsEmailInput.value.trim();
+                    if (!email.includes("@") || !email.includes(".")) {
+                        newsEmailInput.style.borderBottom = "1px solid red";
+                    } else {
+                        newsEmailInput.style.borderBottom = "1px solid green";
+                    }
+                });
                 isValid = false;
             } else {
                 errorElement.style.display = "none";
                 emailInput.style.borderBottom = "1px solid green";
             }
 
-            const newsEmail = newsEmailInput.value.trim();
-            if (newsEmail && (!newsEmail.includes("@") || !newsEmail.includes("."))) {
-
-
-
-                if (newsEmail !== "") {
-                    newsEmailInput.style.borderBottom = "1px solid red";
-                } else {
-                    newsEmailInput.style.borderBottom = "";
-                }
-
-                isValid = false;
-            } else {
-                newsEmailInput.style.borderBottom = "1px solid green";
-            }
 
             submitBtn.disabled = !isValid;
             submitBtn.style.backgroundColor = isValid ? "#4CAF50" : "#ccc";
@@ -228,6 +282,15 @@
                     el.addEventListener("change", validateForm);
                 }
             }
+
+
+            const termsModal = document.getElementById("terms-modal");
+            const termsCheckbox = document.getElementById("terms-check");
+            const privacyPolicyBtn = document.querySelector(".privacy-policy-btn");
+
+            privacyPolicyBtn.addEventListener("click", () => {
+                termsModal.style.display = "block";
+            });
 
             validateForm();
         };
@@ -250,7 +313,7 @@
                 return false;
             }
 
-            const maxSize = 10 * 1024 * 1024;
+            const maxSize = 10;
             if (file.size > maxSize) {
                 showToast("File size exceeds 10MB. Please upload a smaller file.", "error");
 
@@ -294,7 +357,26 @@
         }
 
 
+        function loadPage(event, page) {
+            event.preventDefault();
 
+            fetch(page)
+                .then(res => {
+                    debugger
+
+                    if (!res.ok) {
+                        document.getElementById('main-content').innerHTML = "<p>Error loading page.</p>";
+                        throw new Error('Network response was not ok');
+                    }
+                    return res.text();
+                })
+                .then(html => {
+                    document.getElementById('main-content').innerHTML = html;
+                })
+                .catch(err => {
+                    document.getElementById('main-content').innerHTML = "<p>Error loading page.</p>";
+                });
+        }
 
     </script>
 
