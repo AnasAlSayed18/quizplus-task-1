@@ -18,15 +18,29 @@
         <div class="menu-icon" id="menuIcon">☰</div>
         <nav class="main-menu">
             <ul>
-                <li><a href="company1.html">Company</a></li>
+                <li><a href="#" onclick="loadPage(event, 'company.html')">Company</a></li>
                 <li><a href="index.html">Services</a></li>
                 <li><a href="index.html">FinTechSolutions</a></li>
                 <li><a href="index.html">Products</a></li>
                 <li><a href="index.html">Portfolio</a></li>
                 <li><a href="index.html">ContactUs</a></li>
-                <li><a href="#" onclick="loadPage(event, 'company.html')">Company</a></li>
             </ul>
         </nav>
+
+        <div class="side-drawer" id="sideDrawer">
+            <ul>
+                <li><a href="#" onclick="loadPage(event, 'company.html')">Company</a></li>
+                <li><a href="index.html">Services</a></li>
+                <li><a href="index.html">FinTechSolutions</a></li>
+                <li><a href="index.html">Products</a></li>
+                <li><a href="index.html">Portfolio</a></li>
+                <li><a href="index.html">ContactUs</a></li>
+            </ul>
+        </div>
+
+
+
+
     </header>
 
     <main id="main-content" class="main-content">
@@ -357,12 +371,26 @@
         }
 
 
+
+        const sideDrawer = document.getElementById("sideDrawer");
+
+        menuIcon.addEventListener("click", () => {
+            sideDrawer.classList.toggle("open");
+        });
+
+        document.addEventListener("click", (e) => {
+            if (!sideDrawer.contains(e.target) && !menuIcon.contains(e.target)) {
+                sideDrawer.classList.remove("open");
+            }
+        });
+
+
         function loadPage(event, page) {
             event.preventDefault();
 
             fetch(page)
                 .then(res => {
-                    debugger
+
 
                     if (!res.ok) {
                         document.getElementById('main-content').innerHTML = "<p>Error loading page.</p>";
