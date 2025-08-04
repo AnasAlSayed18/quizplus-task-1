@@ -75,12 +75,12 @@ quizplus-task-1/
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/AnasAlSayed18/quizplus-task-1
+   git clone https://github.com/AnasAlSayed18/quizplus-task
    ```
 
 2. Open the folder:
    ```bash
-   cd quizplus-task-1
+   cd quizplus-task
    ```
 
 3. Open `index.html` in any modern browser:
@@ -96,7 +96,7 @@ quizplus-task-1/
 ## 🧑‍💻 Author
 
 **Anas Al Sayed**  
-📧 [anasalsayed18](mailto:anasalsayed18@gmail.com)  
+📧 [anasalsayed18](mailto:anasalsayed14@gmail.com)  
 🔗 [GitHub Profile](https://github.com/AnasAlSayed18)
 
 ---
