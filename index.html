@@ -14,11 +14,14 @@
 
 <body class="contact-page">
     <header class="header">
-        <div class="logo">Logo</div>
+        <div class="logo">
+            <a class="logo" href="index.html">Logo</a>
+        </div>
         <div class="menu-icon" id="menuIcon">☰</div>
         <nav class="main-menu">
             <ul>
-                <li><a href="#" onclick="loadPage(event, 'company.html')">Company</a></li>
+
+                <li><a href="#" onclick="loadCompanyData()">Company</a></li>
                 <li><a href="index.html">Services</a></li>
                 <li><a href="index.html">FinTechSolutions</a></li>
                 <li><a href="index.html">Products</a></li>
@@ -29,7 +32,7 @@
 
         <div class="side-drawer" id="sideDrawer">
             <ul>
-                <li><a href="#" onclick="loadPage(event, 'company.html')">Company</a></li>
+                <li><a href="#" onclick="loadCompanyData()">Company</a></li>
                 <li><a href="index.html">Services</a></li>
                 <li><a href="index.html">FinTechSolutions</a></li>
                 <li><a href="index.html">Products</a></li>
@@ -68,7 +71,10 @@
                 </div>
 
                 <input type="text" id="contact-name" name="contact-name" placeholder="Contact name" required>
-                <input type="number" id="contact-phone" name="contact-phone" placeholder="Contact Phone" required>
+                <input type="number" id="contact-phone" name="contact-phone" placeholder="Contact Phone" max="10">
+
+
+
                 <input type="email" id="email" name="email" placeholder="Email" required>
                 <small class="error" style="display:none; color:red;">Please, enter valid email address</small>
 
@@ -161,6 +167,7 @@
         form.addEventListener("submit", function (e) {
             e.preventDefault();
             validateForm();
+            validateFormErrorMsg()
             if (!isValid) {
                 alert("Please correct the errors before submitting.");
                 return;
@@ -189,6 +196,7 @@
 
         newsForm.addEventListener("submit", function (e) {
             e.preventDefault();
+            validateFormErrorMsg();
             const newsEmailInput = document.getElementById("news-email");
             const email = newsEmailInput.value.trim();
 
@@ -231,7 +239,6 @@
             if (phone.length !== 10 || isNaN(phone)) {
 
                 if (phone !== "") {
-                    // showToast("Please enter a valid phone number.", "error");
                     phoneInput.style.borderBottom = "1px solid red";
                 } else {
                     phoneInput.style.borderBottom = "";
@@ -288,12 +295,74 @@
 
         }
 
+
+
+
+
+
+        function validateFormErrorMsg() {
+            const emailInput = document.getElementById("email");
+            const phoneInput = document.getElementById("contact-phone");
+            const postCodeInput = document.getElementById("post-code");
+            const newsEmailInput = document.getElementById("news-email");
+
+            const companyName = document.getElementById("company-name").value.trim();
+            const businessType = document.getElementById("business-type").value.trim();
+            const address = document.getElementById("adress").value.trim();
+            const contactName = document.getElementById("contact-name").value.trim();
+            const privacyPolicy = document.getElementById("privacy-policy").checked;
+            const errorElement = document.querySelector(".error");
+
+
+
+
+            const phone = phoneInput.value.trim();
+
+
+            if (phone.length !== 10 || isNaN(phone)) {
+
+                if (phone !== "") {
+                    showToast("Please enter a valid phone number.", "error");
+                }
+            }
+
+            const postCode = postCodeInput.value.trim();
+            if (postCode.length !== 5 || isNaN(postCode)) {
+
+                if (postCode !== "") {
+                    showToast("Please enter a valid postcode.", "error");
+                }
+            }
+
+            const email = emailInput.value.trim();
+            if (!email.includes("@") || !email.includes(".")) {
+                errorElement.style.display = "inline";
+
+                if (email !== "") {
+                    showToast("Please enter a valid email address.", "error");
+                }
+            }
+            newsEmailInput.addEventListener("change", function () {
+                const email = newsEmailInput.value.trim();
+                if (!email.includes("@") || !email.includes(".")) {
+                    showToast("Please enter a valid news email address.", "error");
+                }
+            });
+
+
+
+        }
+
+
+
+
+
         window.onload = function () {
             for (let i = 0; i < form.elements.length; i++) {
                 const el = form.elements[i];
                 if (el.tagName !== "BUTTON") {
+                    el.addEventListener("change", validateFormErrorMsg);
                     el.addEventListener("input", validateForm);
-                    el.addEventListener("change", validateForm);
                 }
             }
 
@@ -307,6 +376,7 @@
             });
 
             validateForm();
+            validateFormErrorMsg();
         };
 
 
@@ -383,6 +453,37 @@
                 sideDrawer.classList.remove("open");
             }
         });
+
+
+
+        function loadCompanyData() {
+            const mainContent = document.getElementById("main-content");
+            mainContent.innerHTML = "<p>Loading company info...</p>";
+
+            fetch("https://jsonplaceholder.typicode.com/posts/1")
+                .then(response => {
+                    if (!response.ok) throw new Error("Failed to fetch");
+                    return response.json();
+                })
+                .then(data => {
+                    mainContent.innerHTML = `
+                <div class="about-section">
+                    <h2>${data.title}</h2>
+                    <p>${data.body}</p>
+                </div>
+            `;
+                })
+                .catch(() => {
+                    mainContent.innerHTML = "<p style='color:red;'>Error loading company data.</p>";
+                });
+        }
+
+
+
+
+
+
+
 
 
         function loadPage(event, page) {

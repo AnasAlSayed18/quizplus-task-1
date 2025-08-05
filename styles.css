@@ -44,6 +44,7 @@ header {
     align-self: center;
     font-family: 'Inter', Inter, Inter, sans-serif;
     padding-left: 160px;
+    text-decoration: none;
     transition: text-shadow 0.3s ease;
     transition-duration: .5s;
 }
@@ -480,19 +481,6 @@ html {
 
 
 
-a {
-    text-decoration: none;
-    color: #383c3e;
-    font-weight: bold;
-    transition: border-bottom 0.3s ease;
-    transition-duration: .2s;
-
-}
-
-a:hover {
-    border-bottom: 2px solid #008f17;
-    border-radius: 1px;
-}
 
 
 
